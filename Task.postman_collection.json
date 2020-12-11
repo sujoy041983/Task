@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "daa3b739-5d5b-480b-8fd5-dbcb435de6dd",
+		"name": "Task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "App_user_login Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "47f83c47-d432-441e-8ab6-770b4b0580e7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 2000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"var jsonData= JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"auth_token\", jsonData.auth_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"phone_number\": \"19292827386\",\r\n    \"firebase_id\": \"firebase_ididid\",\r\n    \"secret_text\": \"the_super_secret_text\",\r\n    \"phone_number_int\": \"+19292827386\",\r\n    \"iso_code\": \"US\"\r\n}"
+				},
+				"url": {
+					"raw": "167.99.73.130:30287/api/v1/field-force/auth/user-login",
+					"host": [
+						"167",
+						"99",
+						"73",
+						"130"
+					],
+					"port": "30287",
+					"path": [
+						"api",
+						"v1",
+						"field-force",
+						"auth",
+						"user-login"
+					]
+				},
+				"description": "Objective: App user login in admin panel\r\n\r\nSE: Shiblu Ahmad\r\nPO: Pranto Majumder\r\nQA: Sujoy Barua\r\nReviewd By: Duha Chowdhury\r\n\r\nTest data :\r\n{\r\n    \"phone_number\": \"19292827386\",\r\n    \"firebase_id\": \"firebase_ididid\",\r\n    \"secret_text\": \"the_super_secret_text\",\r\n    \"phone_number_int\": \"+19292827386\",\r\n    \"iso_code\": \"US\"\r\n}\r\n\r\nExpected result : \r\n{\r\n    \"auth_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDY4NzUxOTMsImlhdCI6MTYwNjI3MDM5Mywic3ViIjo0OTYsIm1vZHVsZXMiOltdLCJ1c2VyX3R5cGUiOiJHZW5lcmFsIiwibmFtZSI6InN1am95IEJhcnVhIiwicGhvbmVfbnVtYmVyIjoiMTkyOTI4MjczODYiLCJtZW1iZXJfdHlwZSI6M30.LUKFmYYYAQJ8hAKnZHbLvamwt017RCu_Ft6beLiDsiY\",\r\n    \"message\": \"Successfully logged in.\",\r\n    \"status\": \"success\"\r\n}\r\nActual Result: \r\n{\r\n    \"auth_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDY4NzUxOTMsImlhdCI6MTYwNjI3MDM5Mywic3ViIjo0OTYsIm1vZHVsZXMiOltdLCJ1c2VyX3R5cGUiOiJHZW5lcmFsIiwibmFtZSI6InN1am95IEJhcnVhIiwicGhvbmVfbnVtYmVyIjoiMTkyOTI4MjczODYiLCJtZW1iZXJfdHlwZSI6M30.LUKFmYYYAQJ8hAKnZHbLvamwt017RCu_Ft6beLiDsiY\",\r\n    \"message\": \"Successfully logged in.\",\r\n    \"status\": \"success\"\r\n}\r\nStatus Code 200\r\nTest Result is Passed"
+			},
+			"response": []
+		},
+		{
+			"name": "TFS_22_App_user_should_be_able_to_view_the_task_list Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8207448f-db9a-4316-8c4c-3401144100b9",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 2000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/v1/field-force/task/user-get-tasks/496",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"field-force",
+						"task",
+						"user-get-tasks",
+						"496"
+					]
+				},
+				"description": "Objective: App user should be able to view the task list\r\n\r\nSE: Shiblu Ahmad\r\nPO: Pranto Majumder\r\nQA: Sujoy Barua\r\nReviewd By: Duha Chowdhury\r\n\r\nMethod: Get\r\n\r\nTest data :\r\n{\r\n    \"message\": [\r\n        {\r\n            \"admin_id\": 786,\r\n            \"album_id\": 206,\r\n            \"assigned_address\": \"Chittagong 1212\",\r\n            \"assigned_location_lattitude\": \"24.43\",\r\n            \"assigned_location_longitude\": \"93.42\",\r\n            \"assigned_time\": \"timestamp\",\r\n            \"bill_amount\": null,\r\n            \"billing_address\": null,\r\n            \"is_paid\": true,\r\n            \"notes\": null,\r\n            \"payment_status\": false,\r\n            \"task_complete_location_lattitude\": null,\r\n            \"task_complete_location_longitude\": null,\r\n            \"task_complete_status\": null,\r\n            \"task_complete_time\": null,\r\n            \"task_id\": 206,\r\n            \"title\": \"Delivery\"\r\n        },\r\n        {\r\n            \"admin_id\": 786,\r\n            \"album_id\": 207,\r\n            \"assigned_address\": \"Chittagong 1212\",\r\n            \"assigned_location_lattitude\": \"24.43\",\r\n            \"assigned_location_longitude\": \"93.42\",\r\n            \"assigned_time\": \"timestamp\",\r\n            \"bill_amount\": null,\r\n            \"billing_address\": null,\r\n            \"is_paid\": true,\r\n            \"notes\": null,\r\n            \"payment_status\": false,\r\n            \"task_complete_location_lattitude\": null,\r\n            \"task_complete_location_longitude\": null,\r\n            \"task_complete_status\": null,\r\n            \"task_complete_time\": null,\r\n            \"task_id\": 207,\r\n            \"title\": \"Delivery\"\r\n        },\r\n        {\r\n            \"admin_id\": 786,\r\n            \"album_id\": 208,\r\n            \"assigned_address\": \"Chittagong 1212\",\r\n            \"assigned_location_lattitude\": \"24.43\",\r\n            \"assigned_location_longitude\": \"93.42\",\r\n            \"assigned_time\": \"timestamp\",\r\n            \"bill_amount\": null,\r\n            \"billing_address\": null,\r\n            \"is_paid\": true,\r\n            \"notes\": null,\r\n            \"payment_status\": false,\r\n            \"task_complete_location_lattitude\": null,\r\n            \"task_complete_location_longitude\": null,\r\n            \"task_complete_status\": null,\r\n            \"task_complete_time\": null,\r\n            \"task_id\": 208,\r\n            \"title\": \"Customer fedback\"\r\n        }\r\n    ],\r\n    \"status\": \"success\"\r\n}\r\nExpected result : \r\n\r\nActual Result: \r\n\r\nStatus Code 200\r\nTest Result is Success"
+			},
+			"response": []
+		},
+		{
+			"name": "TFS_24_App_user_should_be_able_to_give_feedback_for_specific_task Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "da75b537-efe3-4251-8f75-47350da1a25e",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 2000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"notes\":\" product is delivered.\"\r\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/api/v1/field-force/task/update-note/465/205",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"field-force",
+						"task",
+						"update-note",
+						"465",
+						"205"
+					]
+				},
+				"description": "Objective: App user should be able to give feedback for specific task\r\n\r\nSE: Shiblu Ahmad\r\nPO: Pranto Majumder\r\nQA: Sujoy Barua\r\nReviewd By: Duha Chowdhury\r\n\r\nMethod:PUT\r\n\r\nTest data :\r\n{\r\n\"notes\":\" product is delivered.\"\r\n}\r\n\r\nExpected result : \r\n\r\nActual Result: \r\n{\r\n    \"message\": \"Task note update successful\",\r\n    \"status\": \"success\"\r\n}\r\nStatus Code 201\r\nTest Result is success"
+			},
+			"response": []
+		},
+		{
+			"name": "TFS_25_App_user_able_to_update_payment_status_of _paid_task Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dcf46eb2-5839-4595-af82-f8da9a87416e",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 2000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"payment\":\" paid.\"\r\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/api/v1/field-force/task/update-payment/465/205",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"field-force",
+						"task",
+						"update-payment",
+						"465",
+						"205"
+					]
+				},
+				"description": "Objective: App user should be able to update payment status of  paid task\r\n\r\nSE: Shiblu Ahmad\r\nPO: Pranto Majumder\r\nQA: Sujoy Barua\r\nReviewd By: Duha Chowdhury\r\n\r\nMethod:PUT\r\n\r\nTest data :\r\n{\r\n\"payment\":\" paid.\"\r\n}\r\n\r\nExpected result : \r\n\r\nActual Result: \r\n{\r\n    \"message\": \"Payment Update successful\",\r\n    \"status\": \"success\"\r\n}\r\nStatus Code 201\r\nTest Result is Successed"
+			},
+			"response": []
+		},
+		{
+			"name": "TFS_26_App_user_able_to_complete_task_and_update_on_the_app Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6a4ba265-1523-4b71-94c8-e7752481d6fd",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 2000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"notes\":\"Below amount is given\",\r\n\"bill_amount\": 2000,\r\n\"billing_address\": \"Detroit Michigan USA\",\r\n\"task_complete_location_lattitude\": \"54.43\",\r\n\"task_complete_location_longitude\": \"43.42\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "{{URL}}/api/v1/field-force/task/complete-task/465/205",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"field-force",
+						"task",
+						"complete-task",
+						"465",
+						"205"
+					]
+				},
+				"description": "Objective: App user should be able to complete task and update on the app\r\n\r\nSE: Shiblu Ahmad\r\nPO: Pranto Majumder\r\nQA: Sujoy Barua\r\nReviewd By: Duha Chowdhury\r\n\r\nMethod:PUT\r\n\r\nTest data :\r\n{\r\n\"notes\":\"Below amount is given\",\r\n\"bill_amount\": 2000,\r\n\"billing_address\": \"Detroit Michigan USA\",\r\n\"task_complete_location_lattitude\": \"54.43\",\r\n\"task_complete_location_longitude\": \"43.42\"\r\n}\r\n\r\n\r\nExpected result : \r\n\r\nActual Result: \r\n{\r\n    \"message\": \"Successfully completed task\",\r\n    \"status\": \"success\"\r\n}\r\n\r\nStatus Code 201\r\nTest Result is success"
+			},
+			"response": []
+		},
+		{
+			"name": "TFS_27_App_user_should_be_able_to_upload_delivery_image Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d12970e-a1da-4aa3-abe7-024f8e9a9fb8",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 2000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/G:/delivery-man-stand-holding-goods-parcel-front-motorbike-going-to-fast-express-deliver-food-product-customer-175076956.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/api/v1/field-force/task/upload-task-photo/465/205",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"field-force",
+						"task",
+						"upload-task-photo",
+						"465",
+						"205"
+					]
+				},
+				"description": "Objective: App user should be able to upload delivery image\r\n\r\nSE: Shiblu Ahmad\r\nPO: Pranto Majumder\r\nQA: Sujoy Barua\r\nReviewd By: Duha Chowdhury\r\n\r\nMethod:POST\r\n\r\nTest data :\r\n For input payload,\r\n          body-->form-data and select key=File and name it \"photo\"\r\n          value=\"select files\" from computer\r\nExpected result : \r\n\r\nActual Result: \r\n{\r\n    \"message\": \"Photo upload successful\",\r\n    \"status\": \"success\"\r\n}\r\nStatus Code 201\r\nTest Result is success"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
